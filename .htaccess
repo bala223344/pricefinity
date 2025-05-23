@@ -1,0 +1,11 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Exclude /dashboard and its subpaths from rewriting
+RewriteCond %{REQUEST_URI} ^/dashboard(/|$)
+RewriteRule ^ - [L]
+
+# Rewrite URLs like /about or /contact-us to pages.php?query=about or pages.php?query=contact-us
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9\-]+)$ pages.php?path=$1 [L,QSA]
