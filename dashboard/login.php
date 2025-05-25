@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../config.php';
+include 'menubar.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $_POST['username'];
     $pass = $_POST['password'];
@@ -17,9 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<form method="post">
-    <input name="username" placeholder="Username" required>
-    <input name="password" type="password" placeholder="Password" required>
-    <button type="submit">Login</button>
-    <?php if (!empty($error)) echo "<p>$error</p>"; ?>
-</form>
+<div class="login-container">
+  <h2>Dashboard Login</h2>
+  <form method="post">
+      <input name="username" placeholder="Username" required>
+      <input name="password" type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <?php if (!empty($error)) echo "<p>$error</p>"; ?>
+  </form>
+</div>

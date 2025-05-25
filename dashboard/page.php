@@ -3,6 +3,8 @@ session_start();
 if (!isset($_SESSION['user_id'])) header('Location: login.php');
 require_once '../config.php';
 
+include 'menubar.php';
+
 // Handle update if page id is set
 if (isset($_GET['edit'])) {
     $edit_id = intval($_GET['edit']);
@@ -53,18 +55,30 @@ if (isset($_GET['edit'])) {
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-<form id="pageForm" method="post">
-    <input name="title" placeholder="Title" required value="<?= isset($page) ? htmlspecialchars($page['title']) : '' ?>">
-    <input name="slug" placeholder="Slug (e.g. about-us)" required value="<?= isset($page) ? htmlspecialchars($page['slug']) : '' ?>">
-    <input name="meta_title" placeholder="Meta Title" value="<?= isset($page) ? htmlspecialchars($page['meta_title']) : '' ?>">
-    <input name="meta_keywords" placeholder="Meta Keywords (comma separated)" value="<?= isset($page) ? htmlspecialchars($page['meta_keywords']) : '' ?>">
-    <textarea name="meta_description" placeholder="Meta Description"><?= isset($page) ? htmlspecialchars($page['meta_description']) : '' ?></textarea>
-    <div id="description"><?= isset($page) ? $page['description'] : '<h2>Demo Content</h2>\n<p>Preset build with <code>snow</code> theme, and some common formats.</p>' ?></div>
-    <input type="hidden" name="description" id="descInput">
-    <button type="button" onclick="submitPageForm()">
+<div class="page-flex-container">
+  <div class="page-form-left">
+    <form id="pageForm" method="post">
+      <label for="title">Title</label>
+      <input name="title" id="title" placeholder="Title" required value="<?= isset($page) ? htmlspecialchars($page['title']) : '' ?>">
+      <label for="slug">Slug</label>
+      <input name="slug" id="slug" placeholder="Slug (e.g. about-us)" required value="<?= isset($page) ? htmlspecialchars($page['slug']) : '' ?>">
+      <label for="meta_title">Meta Title</label>
+      <input name="meta_title" id="meta_title" placeholder="Meta Title" value="<?= isset($page) ? htmlspecialchars($page['meta_title']) : '' ?>">
+      <label for="meta_keywords">Meta Keywords</label>
+      <input name="meta_keywords" id="meta_keywords" placeholder="Meta Keywords (comma separated)" value="<?= isset($page) ? htmlspecialchars($page['meta_keywords']) : '' ?>">
+      <label for="meta_description">Meta Description</label>
+      <textarea name="meta_description" id="meta_description" placeholder="Meta Description"><?= isset($page) ? htmlspecialchars($page['meta_description']) : '' ?></textarea>
+      <button type="button" onclick="submitPageForm()">
         <?= isset($page) ? 'Update Page' : 'Add Page' ?>
-    </button>
-</form>
+      </button>
+      <input type="hidden" name="description" id="descInput">
+    </form>
+  </div>
+  <div class="page-form-right">
+    <label>Contents</label>
+    <div id="description"><?= isset($page) ? $page['description'] : '' ?></div>
+  </div>
+</div>
 <script>
 
   const quill = new Quill('#description', {
@@ -75,7 +89,7 @@ if (isset($_GET['edit'])) {
       ['image','link'],
     ],
   },
-  placeholder: 'Compose an epic...',
+  placeholder: '',
   theme: 'snow', // or 'bubble'
 });
   <?php if (isset($page)): ?>

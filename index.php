@@ -38,6 +38,7 @@
             51%, 100% { opacity: 0; }
         }
     </style>
+    <?php include 'GA.php'; ?>
 </head>
 <body>
     <svg viewBox="0 0 600 200">

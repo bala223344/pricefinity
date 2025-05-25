@@ -1,0 +1,36 @@
+/* style.css - Common styles for Pricefinity pages */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f8fa;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #2a7ae2;
+    margin-top: 32px;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+div {
+    max-width: 700px;
+    margin: 32px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 32px 40px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+    div {
+        padding: 18px 8px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+}
